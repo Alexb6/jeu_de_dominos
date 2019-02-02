@@ -1,2 +1,1 @@
-# jeu de dominos
-https://fr.wikipedia.org/wiki/Dominos_(jeu)
+My dominoes game in javascript
