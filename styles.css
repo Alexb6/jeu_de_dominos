@@ -18,6 +18,7 @@
     border: 1px solid black;
     border-radius: 5px;
     position: relative;
+    cursor: pointer;
 }
 
 .domino::after {
@@ -38,6 +39,10 @@
     align-items: center;
 }
 
+.dominoSelect {
+    border: 2px dashed aqua;
+}
+
 /* Playing Space */
 #gameSpace {
     display: grid;
@@ -52,7 +57,7 @@
     height: 100vh;
 }
 
-.player1 {
+#player1 {
     grid-area: player1;
     width: 50%;
     height: 100%;
@@ -61,25 +66,28 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-image: url(images/img\ display\ dominos.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
-.player2 {
+#player2 {
     grid-area: player2;
     width: 100%;
     height: 70%;
     border-radius: 5px;
     background-color: #ececec;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-
 }
 
-.player2 p {
-    transform: rotate(90deg);
+#player2 p {
+    /* transform: rotate(90deg); */
 }
 
-.player3 {
+#player3 {
     grid-area: player3;
     width: 50%;
     height: 100%;
@@ -90,19 +98,20 @@
     align-items: center;
 }
 
-.player4 {
+#player4 {
     grid-area: player4;
     width: 100%;
     height: 70%;
     border-radius: 5px;
     background-color: #ececec;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.player4 p {
-    transform: rotate(-90deg);
+#player4 p {
+    /* transform: rotate(-90deg); */
 }
 
 .boardGame {

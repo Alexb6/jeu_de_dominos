@@ -22,6 +22,11 @@ function loadSet() {
 }
 loadSet();
 
+// Add a click event on each domino
+for (let i = 0; i < dominoSet.length; i++) {
+    dominoSet[i].addEventListener('click', selectionDomino);
+}
+
 
 // var dominoTile00 = document.getElementsByClassName('domino00');
 // var dominoTile01 = document.getElementsByClassName('domino01');
@@ -100,30 +105,96 @@ var nbTiles = tilesPerPlayer(nbPlayers);
 handPlayer01 = randomSet.splice(0, nbTiles);
 console.log(handPlayer01);
 
+
+// Selecting the HTML of each player
 var player1Disp = document.getElementById('player1');
-player1Disp.appendChild(handPlayer01);
+var player2Disp = document.getElementById('player2');
+var player3Disp = document.getElementById('player3');
+var player4Disp = document.getElementById('player4');
 
-function displayTiles(array) {
+// Function for sending the dominoes in the HTML zone of the player
+function displayTiles(array, playerXDisp) {
     for (let i = 0; i < array.length; i++) {
-
+        if (playerXDisp == player2Disp) {
+            array[i].style.transform = "rotate(90deg)";
+        } else if (playerXDisp == player4Disp) {
+            array[i].style.transform = "rotate(-90deg)";
+        }
+        playerXDisp.appendChild(array[i])
     }
 }
 
+// console.log(randomSet);
+// var dominoStack = randomSet;
+// console.log(dominoStack);
+
+displayTiles(handPlayer01, player1Disp);
 
 
 
-// var array01 = [2, 4, 6];
-// var array02 = [3, 9];
-// //var newArray = array01+array02
+// Selecting the domino
 
-// var array03 = new Array(array01.length + 1);
-
-// for (let i = 0; i < array01.length; i++) {
-//     array03[i] = array01[i];
+// function selectDomino(array) {
+//     for (let i = 0; i < array.length; i++) {
+//         array[i].addEventListener('click', function () {
+//             array[i].style.cssText = 'border: 2px dashed aqua';
+//         })
+//         let arrayOther = array.splice(i, 1);
+//         for (let j = 0; j < arrayOther.length; j++) {
+//             arrayOther[j].addEventListener('click', function () {
+//                 arrayOther[j].style.cssText = 'border: none';
+//             })
+//         }
+//     }
 // }
 
 
-// console.log(array03);
+// function selectDomino(array) {
+//     for (let i = 0; i < array.length; i++) {
+//         array[i].addEventListener('click', selectionDom)
+//     }
+// }
+
+// function selectionDom(e) {
+//     var tar = e.target;
+//     if (tar.style.cssText !== 'border: 2px dashed aqua') {
+//         tar.style.cssText = 'border: 2px dashed aqua';
+//     } else {
+//         tar.style.cssText = 'border: 1px solid black';
+//     }
+// }
+
+// function selectDomino(array) {
+//     for (let i = 0; i < array.length; i++) {
+//         array[i].addEventListener('click', selectionDom)
+//     }
+// }
+
+// selectDomino(handPlayer01);
+
+// Selecting Domino in player's hand
+var compareArray = []; // Purpose : storing and comparing dominoes in this function
+var clickIndex = 0;
+
+function selectionDomino(e) {
+    var cible = e.target.parentElement;
+    clickIndex++;
+    compareArray.push(cible);
+    console.log(compareArray);
+    if (clickIndex == 1) {
+        cible.style.cssText = 'border: 2px dashed aqua';
+    } else {
+        if (compareArray[compareArray.length - 1] !== compareArray[compareArray.length - 2]) {
+            compareArray[compareArray.length - 1].style.cssText = 'border: 2px dashed aqua';
+            compareArray[compareArray.length - 2].style.cssText = 'border: 1px solid black';
+        }
+    }
+}
+
+// Placing the domino in the playing zone
+
+
+
 
 
 // Center coordinates - https://stackoverflow.com/questions/8027875/how-to-find-the-elements-x-center-coordinates-and-related-window-offset
