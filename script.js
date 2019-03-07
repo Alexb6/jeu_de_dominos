@@ -18,15 +18,15 @@ function loadSet() {
     for (let i = 0; i < 28; i++) {
         dominoSet.push(document.getElementById('d' + i));
     }
+    console.dir(dominoSet);
     return dominoSet;
 }
 loadSet();
 
 // Add a click event on each domino
 for (let i = 0; i < dominoSet.length; i++) {
-    dominoSet[i].addEventListener('click', selectionDomino);
+    dominoSet[i].addEventListener('click', selectionDomino, false);
 }
-
 
 // var dominoTile00 = document.getElementsByClassName('domino00');
 // var dominoTile01 = document.getElementsByClassName('domino01');
@@ -111,6 +111,7 @@ var player1Disp = document.getElementById('player1');
 var player2Disp = document.getElementById('player2');
 var player3Disp = document.getElementById('player3');
 var player4Disp = document.getElementById('player4');
+var gameZoneDisp = document.getElementById('boardGame');
 
 // Function for sending the dominoes in the HTML zone of the player
 function displayTiles(array, playerXDisp) {
@@ -172,29 +173,61 @@ displayTiles(handPlayer01, player1Disp);
 
 // selectDomino(handPlayer01);
 
-// Selecting Domino in player's hand
+
 var compareArray = []; // Purpose : storing and comparing dominoes in this function
 var clickIndex = 0;
+// Selecting Domino in player's hand
+// function selectionDomino(e) {
+//     var cible = e.target.parentElement;
+//     // if (clickIndex == 2) {
+//     //     cible.addEventListener("click", placeDomino(cible));
+//     // }
+//     clickIndex++;
+//     compareArray.push(cible);
+//     // console.log(compareArray);
+//     console.log(cible);
+//     if (clickIndex == 1) {
+//         cible.style.cssText = 'border: 2px dashed aqua';
+//         cible.style.top = -10 + 'px';
+//     } else {
+//         if (compareArray[compareArray.length - 1] !== compareArray[compareArray.length - 2]) {
+//             compareArray[compareArray.length - 1].style.cssText = 'border: 2px dashed aqua';
+//             compareArray[compareArray.length - 2].style.cssText = 'border: 1px solid black';
+//         }
+//     }
+// }
 
+var ledomino;
 function selectionDomino(e) {
-    var cible = e.target.parentElement;
-    clickIndex++;
+    let cible = e.currentTarget;
+    ledomino = cible;
+    let long = compareArray.length;
     compareArray.push(cible);
-    console.log(compareArray);
-    if (clickIndex == 1) {
-        cible.style.cssText = 'border: 2px dashed aqua';
+    if (long == 1) {
+        compareArray[long].style.boxShadow = '0 0 0 1px aqua';
+        compareArray[long].style.top = -10 + 'px';
     } else {
-        if (compareArray[compareArray.length - 1] !== compareArray[compareArray.length - 2]) {
-            compareArray[compareArray.length - 1].style.cssText = 'border: 2px dashed aqua';
-            compareArray[compareArray.length - 2].style.cssText = 'border: 1px solid black';
+        if (compareArray[long - 1] !== compareArray[long - 2]) {
+            compareArray[long - 1].style.boxShadow = '0 0 0 1px aqua';
+            compareArray[long - 1].style.top = -10 + 'px';
+            compareArray[long - 2].style.boxShadow = 'none';
+            compareArray[long - 2].style.top = 0 + 'px';
         }
     }
+
+    // Call the place function
+    gameZoneDisp.addEventListener("click", placeDomino);
 }
 
+
 // Placing the domino in the playing zone
+function placeDomino() {
+    gameZoneDisp.appendChild(ledomino);
+    ledomino.style.border = '1px solid black';
+}
 
 
-
+// gameZoneDisp.addEventListener('click', function(){placeDomino(compareArray)})
 
 
 // Center coordinates - https://stackoverflow.com/questions/8027875/how-to-find-the-elements-x-center-coordinates-and-related-window-offset
